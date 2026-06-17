@@ -18,13 +18,13 @@ app = FastAPI(
 )
 
 # ── CORS Configuration ────────────────────────────────────────────────────────
-# Add the local development ports or production domains of your frontend here
 origins = [
     "http://localhost:3000",      # Default for React / Next.js
     "http://localhost:5173",      # Default for Vite (React/Vue)
     "http://127.0.0.1:5173",
-    # "https://your-frontend.vercel.app"  <-- Add your deployed frontend URL here later
+    "https://studentperformanceanalytics-ui.onrender.com"  # <── Add your exact live frontend URL here
 ]
+
 
 app.add_middleware(
     CORSMiddleware,
