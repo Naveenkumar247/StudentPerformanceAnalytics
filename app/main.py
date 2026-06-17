@@ -1,4 +1,5 @@
 from fastapi import FastAPI
+from fastapi.middleware.cors import CORSMiddleware
 
 from app.api.v1.endpoints.student import router as student_router
 from app.api.v1.endpoints.analytics import router as analytics_router
@@ -14,6 +15,23 @@ app = FastAPI(
     version="1.0.0",
     docs_url="/docs",
     redoc_url="/redoc",
+)
+
+# ── CORS Configuration ────────────────────────────────────────────────────────
+# Add the local development ports or production domains of your frontend here
+origins = [
+    "http://localhost:3000",      # Default for React / Next.js
+    "http://localhost:5173",      # Default for Vite (React/Vue)
+    "http://127.0.0.1:5173",
+    # "https://your-frontend.vercel.app"  <-- Add your deployed frontend URL here later
+]
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=origins,         # Allow specific origins to connect
+    allow_credentials=True,
+    allow_methods=["*"],           # Allows GET, POST, PUT, DELETE, etc.
+    allow_headers=["*"],           # Allows all headers (e.g., Content-Type, Authorization)
 )
 
 # ── API v1 routers ────────────────────────────────────────────────────────────
